@@ -1,0 +1,24 @@
+---
+# Variables global
+bind_zone_domain:
+  name: "estudosdevops.lab"
+  hostmaster_email: "hostmaster"
+  networks:
+    - "1.0.10"
+    -
+
+# List of Acls
+bind_acls: []
+
+# List of IPv4 address of the network interface(s) to listen on. Set to "any"
+# to listen on all interface
+bind_listen_ipv4:
+  - "127.0.0.1"
+
+# List of hosts that are allowed to query this DNS server.
+bind_allow_query:
+  - "localhost"
+
+#default_doman: estudosdevops.lab
+#dns_master: 10.0.1.254
+#reverse_zone: 1.0.10

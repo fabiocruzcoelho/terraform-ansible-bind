@@ -1,0 +1,4 @@
+- name: reload bind
+  systemd:
+    name: named
+    state: reloaded

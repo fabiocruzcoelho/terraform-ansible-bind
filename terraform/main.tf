@@ -68,8 +68,6 @@ resource "libvirt_domain" "domain-dns" {
   graphics {
     type        = "spice"
     listen_type = "address"
-
-    #autoport    = "no"
   }
 }
 

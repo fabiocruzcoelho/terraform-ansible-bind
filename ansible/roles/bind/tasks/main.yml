@@ -1,0 +1,6 @@
+---
+- name: Install packages requirements
+  yum: name={{ items }} state=latest update_cache=yes
+  with_items:
+    - bind
+    - bind_utils

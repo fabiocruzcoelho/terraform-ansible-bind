@@ -1,0 +1,15 @@
+$TTL 24h
+@       IN      SOA     dns.{{ bind_zone_domain.networks[0] }}. root.{{ default_doman }}. (
+        2015083000      ; Serial
+        12h             ; Refresh
+        15m             ; Retry
+        3w              ; Expire
+        2h              ; Mininum TTL
+)
+
+@       IN      NS      dns.{{ default_doman }}.
+254     IN      PTR     dns.{{ default_doman }}.
+
+20      IN      PTR     server1.{{ default_doman }}.
+30      IN      PTR     www.{{ default_doman }}.
+30      IN      PTR     ftp.{{ default_doman }}.
