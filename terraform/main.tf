@@ -7,21 +7,15 @@ provider "libvirt" {
 resource "libvirt_volume" "dns-qcow2" {
   name   = "dns-qcow2"
   pool   = "Vms"
-  source = "/data/Isos/CentOS7-x86_64.qcow2"
+  source = "/data/isos/Linux/CentOS7-x86_64.qcow2"
   format = "qcow2"
-}
-
-# Create a network for our VMs
-resource "libvirt_network" "vm_network" {
-  name      = "vm_network"
-  addresses = ["10.0.1.0/24"]
 }
 
 # Use CloudInit to add our ssh-key to the instance
 resource "libvirt_cloudinit" "commoninit" {
   name               = "commoninit.iso"
   local_hostname     = "dns"
-  ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCf06WpN0rSnOuvvvPaOOba23RbKIeL1br42im14jK9/V0txMSHzmbG3S4R6p6GG8fhbXYvjZ6bqgY40WffNDuPIAONJ0Gp0re1+RkFlUz6aPCH0uPnZJtEcsqatuQCRJ0oYHfNCA94mvdIz3k0JdmaVAUZmRf7tuChcFnQqXvp9i0dOBFdXHF8vi3uFef9z3tkQGA5DPW1f1Mc1vzki6g52JBl5UiTfyTAqj7dw8jdFfMORJehG7UwSM+cAzdpWXYDhj3U3py62zba+VchACwhFyxWked53JBzO3gXKgDuDQok4G9/gHIlwtnIVxPPeurdO9WUvzW5xgOsua2wD92h fabio@note"
+  ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDYRW/3LEdMsYd7RQPRhkULov5kHFqBw5OedvsSSA0a+sOKSiOIa6U6l6zcPyFsYYx+XnPXHZI42slO3ImBghz4kAU0TAzP2jsv6ejf4gS6QeyV0xqwagFJv2ELnN9RJND75p7lXg5Ag1P/+RMfH+WCgQv4LPVqO7RiEqkfwSPa9F6CzOLza9EuNY/7u+eROEpEem3zNudEXJJ5fNkcwRTHh+V4XLUxDkOEwQVDpF6798EUTly+6Dhzrrxo5gXVnBUXzblYAYPAyWZ0FqBXlC+sPOqyaVEsJTNEmkrYw5cccW7/M7t+PINrjGEmnXd4PG5IUqPcHR3WkZG44QKt6HauMwvTLRPF5Feuov56FZJqQXrrJ8Ku+SHR5Ju9SAq7iRqreIrRJT/f8vjL9AXaX4S7b2GzSTKICegD5UqNaN5vAVo2Ih9FLZIJXpTymd4d+rMeprYutXaKStbejgAxRkjdr+epVL0wLZZ4toleZRmTzl+v4Xp5aLHyO+RzuZKFzxAbH9VvcBsjVSvvYLispDnsz6Uw+zce0eX4BvZIFKR2zxSWGB168TJ8IJXEwB9HkPe4lW0nEYA/3cb9wLDuzse5Ez+HgDkWP98OLj+gIcoHQg/OFbIf5I7E081tEQjYKgd3HYpjgYfDA2pdcOy2QDXMdfj7ORjb99cq8fee9FOplQ== fabio@fabio-note"
 
   user_data = <<EOF
 runcmd:
@@ -43,7 +37,7 @@ resource "libvirt_domain" "domain-dns" {
   cloudinit = "${libvirt_cloudinit.commoninit.id}"
 
   network_interface {
-    network_name = "vm_network"
+    network_name = "vnet01"
   }
 
   # IMPORTANT
