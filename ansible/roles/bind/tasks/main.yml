@@ -1,6 +1,20 @@
 ---
 - name: Install packages requirements
-  yum: name={{ items }} state=latest update_cache=yes
+  yum: name={{ item }} state=latest update_cache=yes
   with_items:
     - bind
-    - bind_utils
+    - bind-utils
+  tags:
+    - install
+
+- name: Copy files zone
+  file:
+- name: Copy templates
+  template: src={{ item.src }} dest={{ item.dest }} mode=0644 owner={{ item.owner }} group={{ item.group }}
+  with_items:
+    - { src: named.conf.j2, dest: /etc/named.conf, mode: 0644 ,owner: root, group: root }
+    - { src: zone_domain.j2, dest: /var/named/estudosdevops.lab.db, mode: 0644 ,owner: root, group: root }
+    #- { src: reverse_zone, dest: /var/named/20.168.192.db, mode: 0644 ,owner: root, group: root }
+  notify: reload bind
+  tags:
+    - config

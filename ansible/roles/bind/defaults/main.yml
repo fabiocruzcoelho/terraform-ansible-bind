@@ -1,11 +1,12 @@
 ---
-# Variables global
+# Variables bind
 bind_zone_domain:
   name: "estudosdevops.lab"
   hostmaster_email: "hostmaster"
   networks:
-    - "1.0.10"
-    -
+    - "20.168.192"
+    - "192.168.20.0/24"
+    - "192.168.20.209"
 
 # List of Acls
 bind_acls: []

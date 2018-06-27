@@ -15,9 +15,7 @@ resource "libvirt_volume" "dns-qcow2" {
 resource "libvirt_cloudinit" "commoninit" {
   name               = "commoninit.iso"
   local_hostname     = "dns"
-  ssh_authorized_key = "~/.ssh/id_rsa.pup"
-
-  //ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCf06WpN0rSnOuvvvPaOOba23RbKIeL1br42im14jK9/V0txMSHzmbG3S4R6p6GG8fhbXYvjZ6bqgY40WffNDuPIAONJ0Gp0re1+RkFlUz6aPCH0uPnZJtEcsqatuQCRJ0oYHfNCA94mvdIz3k0JdmaVAUZmRf7tuChcFnQqXvp9i0dOBFdXHF8vi3uFef9z3tkQGA5DPW1f1Mc1vzki6g52JBl5UiTfyTAqj7dw8jdFfMORJehG7UwSM+cAzdpWXYDhj3U3py62zba+VchACwhFyxWked53JBzO3gXKgDuDQok4G9/gHIlwtnIVxPPeurdO9WUvzW5xgOsua2wD92h fabio@note"
+  ssh_authorized_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCf06WpN0rSnOuvvvPaOOba23RbKIeL1br42im14jK9/V0txMSHzmbG3S4R6p6GG8fhbXYvjZ6bqgY40WffNDuPIAONJ0Gp0re1+RkFlUz6aPCH0uPnZJtEcsqatuQCRJ0oYHfNCA94mvdIz3k0JdmaVAUZmRf7tuChcFnQqXvp9i0dOBFdXHF8vi3uFef9z3tkQGA5DPW1f1Mc1vzki6g52JBl5UiTfyTAqj7dw8jdFfMORJehG7UwSM+cAzdpWXYDhj3U3py62zba+VchACwhFyxWked53JBzO3gXKgDuDQok4G9/gHIlwtnIVxPPeurdO9WUvzW5xgOsua2wD92h fabio@note"
 
   user_data = <<EOF
 runcmd:
@@ -68,8 +66,6 @@ resource "libvirt_domain" "domain-dns" {
   }
 }
 
-# Print the Boxes IP
-# Note: you can use `virsh domifaddr <vm_name> <interface>` to get the ip later
 output "ip" {
   value = "${libvirt_domain.domain-dns.network_interface.0.addresses.0}"
 }

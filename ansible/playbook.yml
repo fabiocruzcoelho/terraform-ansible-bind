@@ -1,0 +1,8 @@
+---
+- name: Bind Role
+  hosts: localhost:bind_master
+  connection: local
+  become: True
+  gather_facts: false
+  roles:
+    - { role: bind }
