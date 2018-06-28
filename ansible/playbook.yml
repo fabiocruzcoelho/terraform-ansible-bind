@@ -1,8 +1,24 @@
 ---
 - name: Bind Role
-  hosts: localhost:bind_master
+  hosts: bind_master
   connection: local
   become: True
   gather_facts: false
   roles:
     - { role: bind }
+
+
+
+# - hosts: bind_master
+#   connection: local
+#   become: True
+#   tasks:
+#     - name: Ansible template with_items example.
+#       template:
+#         src: "{{ item.src }}"
+#         dest: "{{ item.dest }}"
+#         mode: 0777
+#       with_items:
+#         - {src: 'templates/named.conf.j2',dest: '/etc/named.conf'}
+#         # - {src: 'ex2.j2',dest: '/home/dnpjose/ex_rew2.txt'}
+#         # - {src: 'ex3.j2',dest: '/home/dnpjose/ex_rew3.txt'}

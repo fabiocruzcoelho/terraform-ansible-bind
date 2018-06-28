@@ -21,5 +21,5 @@ bind_allow_query:
   - "localhost"
 
 #default_doman: estudosdevops.lab
-#dns_master: 10.0.1.254
+dns_master: 10.0.1.254
 #reverse_zone: 1.0.10

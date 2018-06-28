@@ -1,20 +1,39 @@
 ---
-- name: Install packages requirements
-  yum: name={{ item }} state=latest update_cache=yes
-  with_items:
-    - bind
-    - bind-utils
-  tags:
-    - install
+- name: Ansible template with_items example.
+  template:
+    src: named.conf.j2 #"{{ item.src }}"
+    dest: /etc/named.conf #"{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0777
+  # with_items:
+  #     - {src: 'named.conf.j2', dest: '/etc/named.conf'}
 
-- name: Copy files zone
-  file:
-- name: Copy templates
-  template: src={{ item.src }} dest={{ item.dest }} mode=0644 owner={{ item.owner }} group={{ item.group }}
-  with_items:
-    - { src: named.conf.j2, dest: /etc/named.conf, mode: 0644 ,owner: root, group: root }
-    - { src: zone_domain.j2, dest: /var/named/estudosdevops.lab.db, mode: 0644 ,owner: root, group: root }
-    #- { src: reverse_zone, dest: /var/named/20.168.192.db, mode: 0644 ,owner: root, group: root }
-  notify: reload bind
-  tags:
-    - config
+# - name: Install packages requirements
+#   yum: name={{ item }} state=latest update_cache=yes
+#   with_items:
+#     - bind
+#     - bind-utils
+#   tags:
+#     - install
+
+# - name: Copy template named.conf
+#   template:
+#     src: named.conf.j2
+#     dest: /etc/named.conf
+#     owner: root
+#     group: root
+#     mode: 0644
+#   tags:
+#     - config
+
+
+# - name: Copy templates
+#   template: src={{ item.src }} dest={{ item.dest }} mode=0644 owner={{ item.owner }} group={{ item.group }}
+#   with_items:
+#     - { src: named.conf.j2, dest: /etc/named.conf, mode: 0644 ,owner: root, group: root }
+#     #- { src: zone_domain.j2, dest: /var/named/estudosdevops.lab.db, mode: 0644 ,owner: root, group: root }
+#     #- { src: reverse_zone, dest: /var/named/20.168.192.db, mode: 0644 ,owner: root, group: root }
+#   notify: reload bind
+#   tags:
+#     - config
