@@ -1,11 +1,12 @@
 ---
-- name: Bind Role
-  hosts: bind_master
-  connection: local
-  become: True
-  gather_facts: false
+- name: Set up bind
+  hosts: bind
+  gather_facts: true
+  user: centos
+  become: true
+
   roles:
-    - { role: bind }
+    - bind
 
 
 

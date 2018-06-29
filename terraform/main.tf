@@ -25,7 +25,6 @@ runcmd:
   - [ yum, -y, groupinstall, "Development Tools" ]
   - [ iptables, -F ]
   - [ setenforce, 0 ]
-
 EOF
 }
 

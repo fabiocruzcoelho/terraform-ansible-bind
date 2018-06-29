@@ -1,5 +1,5 @@
 $TTL 24h
-@       IN      SOA     dns.{{ bind_zone_domain.name }}. root.{{ bind_zone_domain.name }}. (
+@       IN      SOA     {{ ansible_fqdn }}. admin.{{ domain }}. (
         2015083000      ; Serial
         12h             ; Refresh
         15m             ; Retry
@@ -7,5 +7,9 @@ $TTL 24h
         2h              ; Mininum TTL
 )
 
-@       IN      NS      dns.{{ bind_zone_domain.name }}.
-254     IN      PTR     dns.{{ bind_zone_domain.name }}.
+@       IN      NS      {{ ansible_fqdn }}.
+10      IN      PTR     {{ ansible_fqdn }}.
+
+20      IN      PTR     server1.exemplo.com.br.
+30      IN      PTR     www.exemplo.com.br.
+30      IN      PTR     ftp.exemplo.com.br.
